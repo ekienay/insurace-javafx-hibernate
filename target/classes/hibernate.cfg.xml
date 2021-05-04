@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/
+        Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/insurance?serverTimezone=UTC</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456789</property>
+
+        <property name="hbm2.ddl.auto">update</property>
+
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="show_mysql">true</property>
+
+        <mapping class="entity.Calculator"/>
+        <mapping class="entity.Driver"/>
+        <mapping class="entity.Agent"/>
+        <mapping class="entity.MarkTC"/>
+        <mapping class="entity.Category"/>
+        <mapping class="entity.Osago"/>
+        <mapping class="entity.Pts"/>
+        <mapping class="entity.Certificate"/>
+        <mapping class="entity.DrvLicense"/>
+        <mapping class="entity.TypeEngine"/>
+        <mapping class="entity.TypeTC"/>
+        <mapping class="entity.EcoClass"/>
+        <mapping class="entity.ModelTC"/>
+    </session-factory>
+</hibernate-configuration>

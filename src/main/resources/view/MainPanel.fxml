@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="489.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.MainPanelController">
+   <children>
+      <TabPane prefHeight="494.0" prefWidth="747.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Управление контрактами">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="925.0">
+                     <children>
+                        <ScrollPane layoutY="25.0" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+                           <content>
+                              <TableView fx:id="OsagoTableView" prefHeight="283.0" prefWidth="1630.0">
+                                <columns>
+                                  <TableColumn fx:id="OsagoCount" prefWidth="41.0" text="№" />
+                                  <TableColumn fx:id="OsagoSeriesCell" prefWidth="47.0" text="Серия" />
+                                    <TableColumn fx:id="OsagoNumberCell" prefWidth="56.0" text="Номер" />
+                                    <TableColumn fx:id="OsagoStartInsurance" prefWidth="156.0" text="Дата начала страхования" />
+                                    <TableColumn fx:id="OsagoEndInsurance" prefWidth="191.0" text="Дата окончания страхования" />
+                                    <TableColumn fx:id="OsagoInsurer" minWidth="0.0" prefWidth="88.0" text="Страхователь" />
+                                    <TableColumn fx:id="OsagoOwner" minWidth="0.0" prefWidth="89.0" text="Собственник" />
+                                    <TableColumn fx:id="OsagoMarkAndModel" prefWidth="102.0" text="Марка, модель" />
+                                    <TableColumn fx:id="OsagoVIN" prefWidth="43.0" text="VIN" />
+                                    <TableColumn fx:id="OsagoRegPlate" prefWidth="78.0" text="ГосРегЗнак" />
+                                    <TableColumn fx:id="OsagoCertificateSeries" prefWidth="91.0" text="Серия свид-ва" />
+                                    <TableColumn fx:id="OsagoCertificateNumber" prefWidth="94.0" text="Номер свид-ва" />
+                                    <TableColumn fx:id="OsagoOtherDrivers" prefWidth="148.0" text="Допущенные водители" />
+                                    <TableColumn fx:id="OsagoLicenseSeries" prefWidth="75.0" text="Серия прав" />
+                                    <TableColumn fx:id="OsagoLicenseNumber" text="Номер прав" />
+                                    <TableColumn fx:id="OsagoFinalCost" prefWidth="117.0" text="Страховая премия" />
+                                    <TableColumn fx:id="OsagoInsuranceIssueDate" prefWidth="131.0" text="Дата заключения" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                        <TextField fx:id="fileName" layoutX="25.0" layoutY="349.0" prefHeight="25.0" prefWidth="164.0" promptText="Наименование контракта" />
+                        <TextField fx:id="pathStatus" layoutX="26.0" layoutY="384.0" prefHeight="25.0" prefWidth="197.0" promptText="Выберите папку для сохранения" />
+                        <Button layoutX="223.0" layoutY="384.0" mnemonicParsing="false" onAction="#DirectoryChoice" text="Путь" />
+                        <Button layoutX="26.0" layoutY="421.0" mnemonicParsing="false" onAction="#savePDF" text="Сохранить в PDF" />
+                        <TextField fx:id="Search" layoutX="140.0" layoutY="14.0" prefHeight="25.0" prefWidth="497.0" promptText="введите искомый параметр" />
+                        <Text layoutX="25.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Поиск по таблице" />
+                        <Button layoutX="618.0" layoutY="327.0" mnemonicParsing="false" onAction="#Delete" text="Удалить" />
+                        <Button layoutX="134.0" layoutY="421.0" mnemonicParsing="false" text="Печать" />
+                        <Button layoutX="547.0" layoutY="327.0" mnemonicParsing="false" onAction="#refresh" text="Обновить" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Водители и автомобили">
+            <content>
+                  <AnchorPane prefHeight="847.0" prefWidth="1614.0">
+                     <children>
+                        <Text layoutX="58.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Страхователь/собственник" />
+                        <TextField fx:id="DriverFLP1" layoutX="58.0" layoutY="86.0" promptText="Фамилия Имя Отчество" />
+                        <TextField fx:id="DriverGender1" layoutX="223.0" layoutY="86.0" promptText="Пол" />
+                        <DatePicker fx:id="DriverBirthday1" layoutX="392.0" layoutY="86.0" promptText="Дата рождения" />
+                        <TextField fx:id="DriverAdress1" layoutX="58.0" layoutY="124.0" promptText="Адресс" />
+                        <TextField fx:id="DriverPhone1" layoutX="223.0" layoutY="124.0" promptText="Телефон" />
+                        <TextField fx:id="DriverSeries1" layoutX="392.0" layoutY="124.0" promptText="Серия пасспорта" />
+                        <TextField fx:id="DriverNumber1" layoutX="392.0" layoutY="160.0" promptText="Номер пасспорта" />
+                        <Button layoutX="273.0" layoutY="205.0" mnemonicParsing="false" onAction="#addDrivers" text="Добавить водителя" />
+                        <TextField fx:id="Mark" layoutX="249.0" layoutY="358.0" promptText="Марка ТС" />
+                        <TextField fx:id="Model" layoutX="58.0" layoutY="358.0" promptText="Модель ТС" />
+                        <Button layoutX="424.0" layoutY="358.0" mnemonicParsing="false" onAction="#AddModel" text="Добавить" />
+                        <Separator layoutY="281.0" prefHeight="8.0" prefWidth="678.0" />
+                        <Text layoutX="233.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавить марку и модель автомобиля" />
+
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Водительские права">
+                <content>
+                    <AnchorPane prefHeight="492.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                        <children>
+                            <Text layoutX="245.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление водительских прав" />
+                            <TextField fx:id="Series" layoutX="122.0" layoutY="74.0" promptText="Серия прав" />
+                            <TextField fx:id="Number" layoutX="122.0" layoutY="118.0" promptText="Номер прав" />
+                            <TextField fx:id="NameOrg" layoutX="351.0" layoutY="117.0" prefHeight="25.0" prefWidth="193.0" promptText="Наименование подразделения" />
+                            <Text layoutX="393.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выбирите водителя" />
+                            <ComboBox fx:id="DriverCombo" layoutX="373.0" layoutY="180.0" prefWidth="150.0" />
+                            <Button layoutX="287.0" layoutY="413.0" mnemonicParsing="false" onAction="#addLicense" text="Сформировать" />
+                            <ComboBox fx:id="CategoryCombo" layoutX="141.0" layoutY="284.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo5" layoutX="141.0" layoutY="309.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo1" layoutX="219.0" layoutY="284.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo6" layoutX="219.0" layoutY="309.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo2" layoutX="297.0" layoutY="284.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo7" layoutX="297.0" layoutY="309.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo3" layoutX="375.0" layoutY="284.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo8" layoutX="375.0" layoutY="309.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo4" layoutX="453.0" layoutY="284.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo9" layoutX="453.0" layoutY="309.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo10" layoutX="219.0" layoutY="334.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo13" layoutX="219.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo11" layoutX="297.0" layoutY="334.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo14" layoutX="297.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo12" layoutX="375.0" layoutY="334.0" prefHeight="25.0" prefWidth="78.0" />
+                            <ComboBox fx:id="CategoryCombo15" layoutX="375.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" />
+                            <Text layoutX="264.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выбирите категории прав" />
+                        <DatePicker fx:id="LicenseIssueDate" layoutX="122.0" layoutY="180.0" promptText="Дата выдачи" />
+                        <DatePicker fx:id="LicenseDateEnd" layoutX="351.0" layoutY="74.0" promptText="Дата окончания" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab text="ПТС">
+                <content>
+                    <AnchorPane prefHeight="514.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                        <children>
+                            <Text layoutX="210.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление паспорта транспотрного средства" />
+                            <TextField fx:id="PTSVIN" layoutX="61.0" layoutY="129.0" promptText="VIN" />
+                            <TextField fx:id="PTSyear" layoutX="62.0" layoutY="271.0" promptText="Год изготовления" />
+                            <TextField fx:id="PTSTrailer" layoutX="247.0" layoutY="129.0" promptText="Кузов/Кабина/Прицеп" />
+                            <TextField fx:id="PTSColor" layoutX="247.0" layoutY="154.0" prefHeight="25.0" prefWidth="185.0" promptText="Цвет Кузова/Кабины/Прицепа" />
+                            <TextField fx:id="PTSvolume" layoutX="471.0" layoutY="179.0" prefHeight="25.0" prefWidth="199.0" promptText="Рабочий объём двигателя куб.см" />
+                            <TextField fx:id="PTSmaxWeight" layoutX="370.0" layoutY="246.0" promptText="Масса без нагрузки, кг" />
+                            <TextField fx:id="PTSmanufacturer" layoutX="61.0" layoutY="221.0" prefHeight="25.0" prefWidth="243.0" promptText="Организация - изготовитель ТС (страна)" />
+                            <TextField fx:id="PTScountry" layoutX="62.0" layoutY="246.0" promptText="Страна вывоза ТС" />
+                            <TextField fx:id="PTSpower" layoutX="478.0" layoutY="154.0" prefHeight="25.0" prefWidth="185.0" promptText="Мощность двигателя л.c (кВТ)" />
+                            <TextField fx:id="PTSorg" layoutX="302.0" layoutY="284.0" prefHeight="25.0" prefWidth="286.0" promptText="Наименование организации, выдавшей паспорт" />
+                            <TextField fx:id="PTSaddress" layoutX="370.0" layoutY="311.0" promptText="Адресс регистрации" />
+                            <TextField fx:id="PTScustomers" layoutX="53.0" layoutY="311.0" prefHeight="25.0" prefWidth="165.0" promptText="Таможенные ограничения" />
+                            <TextField fx:id="PTSTDTPO" layoutX="61.0" layoutY="336.0" promptText="Серия № ТД, ТПО" />
+                            <TextField fx:id="PTSweight" layoutX="330.0" layoutY="221.0" prefHeight="25.0" prefWidth="228.0" promptText="Разрешенная максимальная масса, кг" />
+                            <TextField fx:id="PTSSeries" layoutX="61.0" layoutY="66.0" promptText="Серия" />
+                            <TextField fx:id="PTSNumber" layoutX="210.0" layoutY="66.0" promptText="Номер" />
+                            <ComboBox fx:id="EngineCombo" layoutX="496.0" layoutY="129.0" prefWidth="150.0" promptText="Тип двигателя" />
+                            <ComboBox fx:id="PTSDriverCombo" layoutX="370.0" layoutY="336.0" prefWidth="150.0" promptText="Собственник ТС" />
+                            <ComboBox fx:id="CatCombo" layoutX="61.0" layoutY="179.0" prefWidth="150.0" promptText="Категория ТС" />
+                            <ComboBox fx:id="ECOcombo" layoutX="210.0" layoutY="380.0" prefWidth="150.0" promptText="ЭКО класс" />
+                            <ComboBox fx:id="TCcombo" layoutX="61.0" layoutY="154.0" prefWidth="150.0" promptText="Тип ТС" />
+                            <ComboBox fx:id="MarkAndModelCombo" layoutX="62.0" layoutY="380.0" prefWidth="150.0" promptText="Марка, модель ТС" />
+                            <Button layoutX="290.0" layoutY="421.0" mnemonicParsing="false" onAction="#PTSAdd" text="Сформировать" />
+                        <DatePicker fx:id="PTSIssue" layoutX="422.0" layoutY="66.0" promptText="Дата выдачи" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab text="Рег.свидетельство">
+                <content>
+                    <AnchorPane prefHeight="317.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                        <children>
+                            <Text layoutX="229.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление сертификата регистрации " />
+                            <TextField fx:id="CertificateSeries" layoutX="147.0" layoutY="125.0" promptText="Серия сертификата" />
+                            <TextField fx:id="CertificateRegPlate" layoutX="187.0" layoutY="173.0" prefHeight="25.0" prefWidth="296.0" promptText="Государственный регистрационный знак/номер" />
+                            <TextField fx:id="CertificateNumber" layoutX="371.0" layoutY="125.0" promptText="Номер сертификата" />
+                            <ComboBox fx:id="CertificatePTScombo" layoutX="260.0" layoutY="248.0" prefWidth="150.0" />
+                            <Text layoutX="297.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выбирите ПТС" />
+                            <Button layoutX="285.0" layoutY="320.0" mnemonicParsing="false" onAction="#addCertificate" text="Сформировать" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+            <Tab text="ОСАГО">
+               <content>
+                  <AnchorPane>
+                     <children>
+                         <DatePicker fx:id="OsagoStartDate" layoutX="317.0" layoutY="145.0" promptText="Дата начала страхования" />
+                         <Text layoutX="434.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавить ОСАГО" />
+                         <DatePicker fx:id="OsagoEndDate" layoutX="317.0" layoutY="185.0" promptText="Дата конца страхования" />
+                         <DatePicker fx:id="OsagoDateIssue" layoutX="317.0" layoutY="106.0" promptText="Дата заключения" />
+                         <TextField fx:id="OsagoSeries" layoutX="329.0" layoutY="64.0" promptText="Серия ОСАГО" />
+                         <TextField fx:id="OsagoNumber" layoutX="494.0" layoutY="64.0" promptText="Номер ОСАГО" />
+                         <ComboBox fx:id="AgentCombo" layoutX="514.0" layoutY="119.0" prefWidth="150.0" />
+                         <ComboBox fx:id="CalcCombo" layoutX="514.0" layoutY="173.0" prefWidth="150.0" />
+                         <Text layoutX="543.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберете агента" />
+                         <Text layoutX="527.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберете калькулятор" />
+                         <Button layoutX="428.0" layoutY="394.0" mnemonicParsing="false" onAction="#addOsago" text="Сформированть" />
+                        <Text layoutX="27.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление калькулятора коэффициентов" />
+                        <TextField fx:id="BaseCost" layoutX="70.0" layoutY="76.0" promptText="Базовая ставка" />
+                        <TextField fx:id="FinalCost" layoutX="70.0" layoutY="271.0" promptText="Итоговая ставка" />
+                        <TextField fx:id="KBMconf" layoutX="70.0" layoutY="157.0" prefHeight="25.0" prefWidth="38.0" promptText="КБМ" />
+                        <TextField fx:id="KTCof" layoutX="70.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" promptText="КТ" />
+                        <TextField fx:id="KBSconf" layoutX="70.0" layoutY="197.0" prefHeight="25.0" prefWidth="38.0" promptText="КВС" />
+                        <TextField fx:id="KOconf" layoutX="70.0" layoutY="232.0" prefHeight="25.0" prefWidth="38.0" promptText="КО" />
+                        <TextField fx:id="KSconf" layoutX="181.0" layoutY="157.0" prefHeight="25.0" prefWidth="38.0" promptText="КС" />
+                        <TextField fx:id="KMconf" layoutX="181.0" layoutY="118.0" prefHeight="25.0" prefWidth="38.0" promptText="КМ" />
+                        <TextField fx:id="KNconf" layoutX="181.0" layoutY="197.0" prefHeight="25.0" prefWidth="38.0" promptText="КН" />
+                        <TextField fx:id="KPconf" layoutX="181.0" layoutY="232.0" prefHeight="25.0" prefWidth="38.0" promptText="КП" />
+                        <Button layoutX="96.0" layoutY="333.0" mnemonicParsing="false" onAction="#addCalc" text="Сформировать" />
+                        <Text layoutX="412.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите Страхователей" />
+                        <ComboBox fx:id="driver1" layoutX="317.0" layoutY="259.0" prefWidth="150.0" />
+                        <ComboBox fx:id="driver2" layoutX="494.0" layoutY="259.0" prefWidth="150.0" />
+                        <ComboBox fx:id="driver3" layoutX="317.0" layoutY="296.0" prefWidth="150.0" />
+                        <ComboBox fx:id="driver4" layoutX="494.0" layoutY="296.0" prefWidth="150.0" />
+                        <ComboBox fx:id="driver5" layoutX="403.0" layoutY="346.0" prefWidth="150.0" />
+                        <Separator layoutX="278.0" layoutY="2.0" orientation="VERTICAL" prefHeight="459.0" prefWidth="9.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

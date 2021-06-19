@@ -1,7 +1,6 @@
 package service;
 
 import dao.DAO;
-import entity.Driver;
 import entity.Osago;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class OsagoService implements DAO<Osago, Integer> {
+public class OsagoService implements DAO<Osago> {
 
     private final SessionFactory factory;
 
@@ -45,16 +44,8 @@ public class OsagoService implements DAO<Osago, Integer> {
     }
 
     @Override
-    public Osago readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Osago.class, integer);
-
-        }
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Osago> generateContract() {
+    public List<Osago> findByAll() {
         try(Session session = factory.openSession()){
             Query<Osago> query = session.createQuery("From Osago");
             return query.list();

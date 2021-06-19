@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class EcoClassService implements DAO<EcoClass,Integer> {
+public class EcoClassService implements DAO<EcoClass> {
 
     private final SessionFactory factory;
 
@@ -33,13 +33,8 @@ public class EcoClassService implements DAO<EcoClass,Integer> {
     }
 
     @Override
-    public EcoClass readById(Integer integer) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<EcoClass> generateContract() {
+    public List<EcoClass> findByAll() {
         try(Session session = factory.openSession()){
             Query<EcoClass> query = session.createQuery("From EcoClass");
             return query.list();

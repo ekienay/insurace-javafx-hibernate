@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class DrvLicenseService implements DAO<DrvLicense, Integer> {
+public class DrvLicenseService implements DAO<DrvLicense> {
 
     private final SessionFactory factory;
 
@@ -48,16 +48,8 @@ public class DrvLicenseService implements DAO<DrvLicense, Integer> {
     }
 
     @Override
-    public DrvLicense readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(DrvLicense.class, integer);
-        }
-
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<DrvLicense> generateContract() {
+    public List<DrvLicense> findByAll() {
         try(Session session = factory.openSession()){
             Query<DrvLicense> query = session.createQuery("From DrvLicense");
             return query.list();

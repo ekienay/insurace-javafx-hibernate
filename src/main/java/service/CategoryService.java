@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class CategoryService implements DAO<Category,Integer> {
+public class CategoryService implements DAO<Category> {
 
     private final SessionFactory factory;
 
@@ -47,15 +47,8 @@ public class CategoryService implements DAO<Category,Integer> {
     }
 
     @Override
-    public Category readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Category.class, integer);
-        }
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Category> generateContract() {
+    public List<Category> findByAll() {
         try(Session session = factory.openSession()){
             Query<Category> query = session.createQuery("From Category");
             return query.list();

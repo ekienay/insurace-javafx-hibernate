@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class ModelTCService implements DAO<ModelTC,Integer> {
+public class ModelTCService implements DAO<ModelTC> {
     private final SessionFactory factory;
 
     public ModelTCService(SessionFactory factory) {
@@ -47,13 +47,8 @@ public class ModelTCService implements DAO<ModelTC,Integer> {
     }
 
     @Override
-    public ModelTC readById(Integer integer) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<ModelTC> generateContract() {
+    public List<ModelTC> findByAll() {
         try(Session session = factory.openSession()){
             Query<ModelTC> query = session.createQuery("From ModelTC");
             return query.list();

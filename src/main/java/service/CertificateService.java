@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class CertificateService implements DAO<Certificate,Integer> {
+public class CertificateService implements DAO<Certificate> {
 
     private final SessionFactory factory;
 
@@ -47,15 +47,8 @@ public class CertificateService implements DAO<Certificate,Integer> {
     }
 
     @Override
-    public Certificate readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Certificate.class,integer);
-        }
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Certificate> generateContract() {
+    public List<Certificate> findByAll() {
         try(Session session = factory.openSession()){
             Query<Certificate> query = session.createQuery("From Certificate");
             return query.list();

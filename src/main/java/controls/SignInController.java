@@ -61,8 +61,8 @@ public class SignInController {
 
     @FXML
     void initialize() {
-        DAO<Agent, Integer> agentIntegerDAO = new AgentService(factory);
-        agentObservableList.addAll(agentIntegerDAO.generateContract());
+        DAO<Agent> agentIntegerDAO = new AgentService(factory);
+        agentObservableList.addAll(agentIntegerDAO.findByAll());
 
         AgentComboBox.setItems(agentObservableList);
         AgentComboBox.getSelectionModel().selectedItemProperty().addListener((obj, oldValue, newValue) -> {

@@ -14,9 +14,17 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.DateStringConverter;
+import javafx.util.converter.DoubleStringConverter;
 import org.dom4j.DocumentException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -31,7 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
-
+import java.util.Iterator;
 
 
 public class MainPanelController {
@@ -64,6 +72,20 @@ public class MainPanelController {
 
 
     @FXML
+    private Text selectStatus;
+
+    @FXML
+    private TableView<Osago> ShowOsaga;
+
+    @FXML
+    private TableColumn<Osago, Date> showSeries;
+
+    @FXML
+    private TableColumn<Osago, Date> showNumber;
+
+    @FXML
+    private ComboBox<Driver> selectDrivers;
+    @FXML
     private TableView<Osago> OsagoTableView;
 
     @FXML
@@ -92,6 +114,15 @@ public class MainPanelController {
 
     @FXML
     private TableColumn<Osago, String> OsagoVIN;
+
+    @FXML
+    private ComboBox<?> driver6;
+
+    @FXML
+    private ComboBox<?> driver7;
+
+    @FXML
+    private Button ex;
 
     @FXML
     private TableColumn<Osago, String> OsagoRegPlate;
@@ -370,7 +401,7 @@ public class MainPanelController {
 
     @FXML
     void addCertificate(ActionEvent event) {
-        DAO<Certificate,Integer> certificateIntegerDAO = new CertificateService(factory);
+        DAO<Certificate> certificateIntegerDAO = new CertificateService(factory);
         Certificate certificate = new Certificate();
         certificate.setCertificateSeries(CertificateSeries.getText());
         certificate.setCertificateNumber(CertificateNumber.getText());
@@ -383,7 +414,7 @@ public class MainPanelController {
 
     @FXML
     void PTSAdd(ActionEvent event) throws ParseException {
-        DAO<Pts,Integer> ptsIntegerDAO = new PtsService(factory);
+        DAO<Pts> ptsIntegerDAO = new PtsService(factory);
         Pts pts = new Pts();
         pts.setPtsSeries(PTSSeries.getText());
         pts.setPtsNumber(PTSNumber.getText());
@@ -418,8 +449,8 @@ public class MainPanelController {
 
     @FXML
     void AddModel(ActionEvent event) {
-        DAO<ModelTC, Integer> modelTCIntegerDAO = new ModelTCService(factory);
-        DAO<MarkTC,Integer> markTCIntegerDAO = new MarkTCService(factory);
+        DAO<ModelTC> modelTCIntegerDAO = new ModelTCService(factory);
+        DAO<MarkTC> markTCIntegerDAO = new MarkTCService(factory);
 
         MarkTC markTC = new MarkTC();
         markTC.setTCMark(Mark.getText());
@@ -435,7 +466,7 @@ public class MainPanelController {
 
     @FXML
     void addDrivers(ActionEvent event) throws ParseException {
-        DAO<Driver,Integer> driverIntegerDAO = new DriverService(factory);
+        DAO<Driver> driverIntegerDAO = new DriverService(factory);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Driver driver = new Driver();
         driver.setFlp(DriverFLP1.getText());
@@ -453,7 +484,7 @@ public class MainPanelController {
     @FXML
     void addOsago(ActionEvent event) throws ParseException {
 
-        DAO<Osago, Integer> osagoIntegerDAO = new OsagoService(factory);
+        DAO<Osago> osagoIntegerDAO = new OsagoService(factory);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         Osago osago = new Osago();
@@ -526,6 +557,17 @@ public class MainPanelController {
     }
 
     @FXML
+    void exit(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/SignInWindow.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Вход");
+        stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("icon/insurance-icon.jpg"));
+        stage.show();
+        ex.getScene().getWindow().hide();
+
+    }
+    @FXML
     void DirectoryChoice(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File dir = directoryChooser.showDialog(stage);
@@ -553,16 +595,15 @@ public class MainPanelController {
 
     @FXML
     void Delete(ActionEvent event) {
-            Osago osago = OsagoTableView.getSelectionModel().getSelectedItem();
-            DAO<Osago,Integer> osagoIntegerDAO = new OsagoService(factory);
-            if (osago == null){
-                System.out.println("is empty");
-            }
-            else {
-                OsagoTableView.getItems().remove(osago);
-                osagoIntegerDAO.delete(osago);
+        DAO<Osago> osagoIntegerDAO = new OsagoService(factory);
+        Osago osago = OsagoTableView.getSelectionModel().getSelectedItem();
+        if (osago == null){
+            System.out.println("empty");
+        }else {
+//            OsagoTableView.getItems().remove(osago);
+            osagoIntegerDAO.delete(osago);
+        }
 
-            }
     }
     @FXML
     void refresh(ActionEvent event) {
@@ -571,7 +612,7 @@ public class MainPanelController {
 
     @FXML
     void addLicense(ActionEvent event) throws ParseException {
-        DAO<DrvLicense, Integer> drvLicenseIntegerDAO = new DrvLicenseService(factory);
+        DAO<DrvLicense> drvLicenseIntegerDAO = new DrvLicenseService(factory);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DrvLicense drvLicense = new DrvLicense();
         LocalDate issue = LicenseIssueDate.getValue();
@@ -670,7 +711,7 @@ public class MainPanelController {
 
     @FXML
     void addCalc(ActionEvent event) {
-        DAO<Calculator, Integer> calculatorIntegerDAO = new CalculatorService(factory);
+        DAO<Calculator> calculatorIntegerDAO = new CalculatorService(factory);
 
         if (KTCof.getText().isEmpty()){
             KTCof.setText((String.valueOf(1.0)));
@@ -718,26 +759,26 @@ public class MainPanelController {
     }
 
     public void initDatabase(){
-        DAO<Agent, Integer> agentIntegerDAO = new AgentService(factory);
-        agentObservableList.addAll(agentIntegerDAO.generateContract());
-        DAO<Calculator, Integer> calculatorIntegerDAO = new CalculatorService(factory);
-        calculatorObservableList.addAll(calculatorIntegerDAO.generateContract());
-        DAO<ModelTC,Integer> modelTCIntegerDAO = new ModelTCService(factory);
-        modelTCObservableList.addAll(modelTCIntegerDAO.generateContract());
-        DAO<TypeTC,Integer> typeTCIntegerDAO = new TypeTCService(factory);
-        typeTCObservableList.addAll(typeTCIntegerDAO.generateContract());
-        DAO<EcoClass,Integer> ecoClassIntegerDAO = new EcoClassService(factory);
-        ecoClassObservableList.addAll(ecoClassIntegerDAO.generateContract());
-        DAO<TypeEngine,Integer> typeEngineIntegerDAO = new TypeEngineService(factory);
-        typeEngineObservableList.addAll(typeEngineIntegerDAO.generateContract());
-        DAO<Driver, Integer> driverIntegerDAO = new DriverService(factory);
-        driverObservableList.addAll(driverIntegerDAO.generateContract());
-        DAO<Category, Integer> categoryIntegerDAO = new CategoryService(factory);
-        categoryObservableList.addAll(categoryIntegerDAO.generateContract());
-        DAO<Pts,Integer> ptsIntegerDAO = new PtsService(factory);
-        ptsObservableList.addAll(ptsIntegerDAO.generateContract());
-        DAO<Osago,Integer> osagoIntegerDAO = new OsagoService(factory);
-        osagoObservableList.addAll(osagoIntegerDAO.generateContract());
+        DAO<Agent> agentIntegerDAO = new AgentService(factory);
+        agentObservableList.addAll(agentIntegerDAO.findByAll());
+        DAO<Calculator> calculatorIntegerDAO = new CalculatorService(factory);
+        calculatorObservableList.addAll(calculatorIntegerDAO.findByAll());
+        DAO<ModelTC> modelTCIntegerDAO = new ModelTCService(factory);
+        modelTCObservableList.addAll(modelTCIntegerDAO.findByAll());
+        DAO<TypeTC> typeTCIntegerDAO = new TypeTCService(factory);
+        typeTCObservableList.addAll(typeTCIntegerDAO.findByAll());
+        DAO<EcoClass> ecoClassIntegerDAO = new EcoClassService(factory);
+        ecoClassObservableList.addAll(ecoClassIntegerDAO.findByAll());
+        DAO<TypeEngine> typeEngineIntegerDAO = new TypeEngineService(factory);
+        typeEngineObservableList.addAll(typeEngineIntegerDAO.findByAll());
+        DAO<Driver> driverIntegerDAO = new DriverService(factory);
+        driverObservableList.addAll(driverIntegerDAO.findByAll());
+        DAO<Category> categoryIntegerDAO = new CategoryService(factory);
+        categoryObservableList.addAll(categoryIntegerDAO.findByAll());
+        DAO<Pts> ptsIntegerDAO = new PtsService(factory);
+        ptsObservableList.addAll(ptsIntegerDAO.findByAll());
+        DAO<Osago> osagoIntegerDAO = new OsagoService(factory);
+        osagoObservableList.addAll(osagoIntegerDAO.findByAll());
 }
 
     public void initComboBox(){
@@ -870,29 +911,120 @@ public class MainPanelController {
     driver5.getSelectionModel().selectedItemProperty().addListener((obj,oldValue,newValue) ->{
         driverItem = newValue;
     });
+    selectDrivers.setItems(driverObservableList);
+    selectDrivers.getSelectionModel().selectedItemProperty().addListener((obj, oldValue, newValue) -> {
+        driverItem = newValue;
+    });
 }
 
     public void initTableView(){
         OsagoSeriesCell.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getOsagoSeries()));
+        OsagoSeriesCell.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoSeriesCell.setOnEditCommit(e -> {
+            String newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.setOsagoSeries(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoNumberCell.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getOsagoNumber()));
+        OsagoNumberCell.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoNumberCell.setOnEditCommit(e -> {
+            String newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.setOsagoNumber(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+
+        });
         OsagoStartInsurance.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getStartInsurance()));
+        OsagoStartInsurance.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter()));
+        OsagoStartInsurance.setOnEditCommit(e -> {
+            Date newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.setStartInsurance(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+
+        });
         OsagoEndInsurance.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getEndInsurance()));
+        OsagoEndInsurance.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter()));
+        OsagoEndInsurance.setOnEditCommit(e -> {
+            Date newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.setEndInsurance(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoCount.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getId()));
         OsagoInsurer.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getName().toString().replace("["," ").replace("]","")));
+        OsagoInsurer.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoInsurer.setOnEditCommit(e -> {
+            String neValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.getDrivers().iterator().next().setFlp(neValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoOwner.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getName().toString().replace("["," ").replace("]","")));
+        OsagoOwner.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoOwner.setOnEditCommit(e -> {
+            String newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.getDrivers().iterator().next().setFlp(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoMarkAndModel.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getModel().toString().replace("["," ").replace("]","")));
+        OsagoMarkAndModel.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoMarkAndModel.setOnEditCommit(e -> {
+            String newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.getDrivers().iterator().next().getPts().iterator().next().getModelTC().setModel(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoVIN.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getVin().toString().replace("["," ").replace("]","")));
+        OsagoVIN.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoVIN.setOnEditCommit(e -> {
+            String newValue = e.getNewValue();
+            Osago osago = e.getRowValue();
+            osago.getDrivers().iterator().next().getPts().iterator().next().setVin(newValue);
+            DAO<Osago> osagoDAO = new OsagoService(factory);
+            osagoDAO.update(osago);
+        });
         OsagoRegPlate.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getRegPlate().toString().replace("["," ").replace("]","")));
+        OsagoRegPlate.setCellFactory(TextFieldTableCell.forTableColumn());
         OsagoFinalCost.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getCalculator().getFinalCost()));
+        OsagoFinalCost.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         OsagoInsuranceIssueDate.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getDateOfIssue()));
+        OsagoInsuranceIssueDate.setCellFactory(TextFieldTableCell.forTableColumn(new DateStringConverter()));
         OsagoCertificateSeries.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getCertificateSeries().toString().replace("["," ").replace("]","")));
+        OsagoCertificateSeries.setCellFactory(TextFieldTableCell.forTableColumn());
         OsagoCertificateNumber.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getCertificateNumber().toString().replace("["," ").replace("]","")));
+        OsagoCertificateNumber.setCellFactory(TextFieldTableCell.forTableColumn());
         OsagoLicenseSeries.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getLicenseSeries().toString().replace("["," ").replace("]","")));
+        OsagoLicenseSeries.setCellFactory(TextFieldTableCell.forTableColumn());
         OsagoLicenseNumber.setCellValueFactory(o -> new SimpleObjectProperty<>(o.getValue().getLicenseNumber().toString().replace("["," ").replace("]","")));
+        OsagoLicenseNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+        OsagoOtherDrivers.setCellValueFactory(driver4 -> new SimpleObjectProperty<>(driver4.getValue().getName().iterator().next()));
         OsagoTableView.setItems(osagoObservableList);
-        OsagoInsurer.setUserData(driverObservableList);
         OsagoTableView.setEditable(true);
         OsagoTableView.getSelectionModel().selectedItemProperty().addListener((obj,oldValue,newValue) -> osagoItem = newValue);
+    }
+    @FXML
+    void select(ActionEvent event) {
+
+        ObservableList<Osago> observableList = FXCollections.observableArrayList();
+
+        for (Osago osago : selectDrivers.getValue().getOsagos()) {
+            observableList.addAll(osago);
+        }
+
+        selectStatus.setText("Колличество оформленных стаховых полисов: " + observableList.size());
+        showNumber.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getStartInsurance()));
+        showSeries.setCellValueFactory(p -> new SimpleObjectProperty<>(p.getValue().getEndInsurance()));
+        ShowOsaga.setItems(observableList);
     }
 
     public void clearScreen(){
@@ -909,12 +1041,18 @@ public class MainPanelController {
         initialize();
     }
 
+    public void selectShowOsago() {
+
+
+    }
 
     @FXML
     void initialize() {
         initDatabase();
         initTableView();
+        selectShowOsago();
         initComboBox();
+
 
         // Search
         FilteredList<Osago> filteredList = new FilteredList<>(osagoObservableList, b -> true);

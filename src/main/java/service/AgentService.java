@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class AgentService implements DAO<Agent, Integer> {
+public class AgentService implements DAO<Agent> {
     private final SessionFactory factory;
 
     public AgentService(SessionFactory factory) {
@@ -44,20 +44,11 @@ public class AgentService implements DAO<Agent, Integer> {
             session.getTransaction().commit();
             session.close();
         }
-
-    }
-
-    @Override
-    public Agent readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Agent.class, integer);
-
-        }
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Agent> generateContract() {
+    public List<Agent> findByAll() {
         try(Session session = factory.openSession()){
             List<Agent> agentList = session.createQuery("From Agent").list();
             session.close();

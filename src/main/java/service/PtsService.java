@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class PtsService implements DAO<Pts,Integer> {
+public class PtsService implements DAO<Pts> {
 
     private final SessionFactory factory;
 
@@ -48,13 +48,8 @@ public class PtsService implements DAO<Pts,Integer> {
     }
 
     @Override
-    public Pts readById(Integer integer) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Pts> generateContract() {
+    public List<Pts> findByAll() {
          try(Session session = factory.openSession()){
              Query<Pts> query = session.createQuery("From Pts");
              return query.list();

@@ -28,7 +28,7 @@ CREATE TABLE `agent` (
   `login` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `agent` (
 
 LOCK TABLES `agent` WRITE;
 /*!40000 ALTER TABLE `agent` DISABLE KEYS */;
-INSERT INTO `agent` VALUES (1,'Петр Дьяковский Александрович','petr34','8990');
+INSERT INTO `agent` VALUES (1,'Петр Дьяковский Александрович','petr34','8990'),(2,'Александр Волков Валерьевич','admin','admin');
 /*!40000 ALTER TABLE `agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `calculator` (
   `KP` double DEFAULT NULL,
   `final_cost` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `calculator` (
 
 LOCK TABLES `calculator` WRITE;
 /*!40000 ALTER TABLE `calculator` DISABLE KEYS */;
-INSERT INTO `calculator` VALUES (3,4000,1.2,1,1,1.3,1,1.6,1,1,9984),(15,5000,1.3,1.2,1.1,1.2,1,1,1,1,10296);
+INSERT INTO `calculator` VALUES (20,4000,1.3,1.2,1,1,1.2,1,1,1,7488),(21,4000,1.3,1.2,1.3,1,1.2,1,1,1,9734),(22,4000,1.1,1.1,1,1,1.2,1,1,1,5808);
 /*!40000 ALTER TABLE `calculator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `category_to_license` (
 
 LOCK TABLES `category_to_license` WRITE;
 /*!40000 ALTER TABLE `category_to_license` DISABLE KEYS */;
-INSERT INTO `category_to_license` VALUES (4,4),(4,6);
+INSERT INTO `category_to_license` VALUES (14,9),(4,9),(16,9),(7,10),(4,10),(1,11),(14,11),(4,11);
 /*!40000 ALTER TABLE `category_to_license` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `certificate_dimmatriculation` (
   PRIMARY KEY (`id`),
   KEY `fk_certificate_dimmatriculation_PTS1_idx` (`PTS_id`),
   CONSTRAINT `fk_certificate_dimmatriculation_PTS1` FOREIGN KEY (`PTS_id`) REFERENCES `pts` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `certificate_dimmatriculation` (
 
 LOCK TABLES `certificate_dimmatriculation` WRITE;
 /*!40000 ALTER TABLE `certificate_dimmatriculation` DISABLE KEYS */;
-INSERT INTO `certificate_dimmatriculation` VALUES (5,'2313','2131','31312',4),(7,'123131','21332','2313',6);
+INSERT INTO `certificate_dimmatriculation` VALUES (10,'0001','0001','0001',9),(11,'0002','0002','0002',10),(12,'0003','0003','0003',11);
 /*!40000 ALTER TABLE `certificate_dimmatriculation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `driver` (
   `passport_series` varchar(45) NOT NULL,
   `passport_number` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `driver` (
 
 LOCK TABLES `driver` WRITE;
 /*!40000 ALTER TABLE `driver` DISABLE KEYS */;
-INSERT INTO `driver` VALUES (23,'Артём Кириллов','М','2021-05-12','г.Павлово','+7-902-678-22-18','2401','870924'),(29,'Hjsadsad','s','2021-04-29','asda','sadad','asda','sadad'),(30,'asdasd','g','2021-04-15','qq','q','q','q'),(31,'Миронов Роман Дмитриевич','м','2001-07-06','г.Павлово','+7-908-154-17-00','2215','785267');
+INSERT INTO `driver` VALUES (34,'Кириллов Артём Юрьевич','м','2007-05-31','г.Павлово','+7809123123','2213','1231313'),(35,'Иваков Александр Акимович','м','2007-05-31','г.Павлово','+7908131233','2189','89099'),(36,'Зеленова Светлана Олеговна','ж','2007-05-31','г.Павлово','+7907131331','1898','000000');
 /*!40000 ALTER TABLE `driver` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `driver_to_osago` (
 
 LOCK TABLES `driver_to_osago` WRITE;
 /*!40000 ALTER TABLE `driver_to_osago` DISABLE KEYS */;
-INSERT INTO `driver_to_osago` VALUES (23,12),(31,19);
+INSERT INTO `driver_to_osago` VALUES (34,24),(35,25),(36,26);
 /*!40000 ALTER TABLE `driver_to_osago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +229,7 @@ CREATE TABLE `drv_license` (
   PRIMARY KEY (`id`),
   KEY `fk_drv_license_driver1_idx` (`driver_id`),
   CONSTRAINT `fk_drv_license_driver1` FOREIGN KEY (`driver_id`) REFERENCES `driver` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `drv_license` (
 
 LOCK TABLES `drv_license` WRITE;
 /*!40000 ALTER TABLE `drv_license` DISABLE KEYS */;
-INSERT INTO `drv_license` VALUES (4,'2021-04-06','2021-04-27','ГИБДД','12321','1233',23),(6,'2021-05-02','2031-05-02','ГИБДД','21312','2131',31);
+INSERT INTO `drv_license` VALUES (9,'1993-06-05','2003-06-05','ГИБДД','0003','0003',36),(10,'1994-06-05','2004-06-05','ГИБДД','0002','0002',35),(11,'1995-06-05','2005-06-05','ГИБДД','0001','0001',34);
 /*!40000 ALTER TABLE `drv_license` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +277,7 @@ CREATE TABLE `mark_tc` (
   `id` int NOT NULL AUTO_INCREMENT,
   `TC_mark` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +286,7 @@ CREATE TABLE `mark_tc` (
 
 LOCK TABLES `mark_tc` WRITE;
 /*!40000 ALTER TABLE `mark_tc` DISABLE KEYS */;
-INSERT INTO `mark_tc` VALUES (1,'Ford');
+INSERT INTO `mark_tc` VALUES (7,'BMW'),(8,'audi'),(9,'TOYOTA');
 /*!40000 ALTER TABLE `mark_tc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +304,7 @@ CREATE TABLE `model_tc` (
   PRIMARY KEY (`id`),
   KEY `fk_model_TC_mark_TC1_idx` (`mark_TC_id`),
   CONSTRAINT `fk_model_TC_mark_TC1` FOREIGN KEY (`mark_TC_id`) REFERENCES `mark_tc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +313,7 @@ CREATE TABLE `model_tc` (
 
 LOCK TABLES `model_tc` WRITE;
 /*!40000 ALTER TABLE `model_tc` DISABLE KEYS */;
-INSERT INTO `model_tc` VALUES (1,'Mustang',1);
+INSERT INTO `model_tc` VALUES (6,'x5',7),(7,'A4',8),(8,'Tundra',9);
 /*!40000 ALTER TABLE `model_tc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +338,7 @@ CREATE TABLE `osago` (
   KEY `fk_osago_calculator1_idx` (`calculator_id`),
   CONSTRAINT `fk_osago_agent1` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`),
   CONSTRAINT `fk_osago_calculator1` FOREIGN KEY (`calculator_id`) REFERENCES `calculator` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +347,7 @@ CREATE TABLE `osago` (
 
 LOCK TABLES `osago` WRITE;
 /*!40000 ALTER TABLE `osago` DISABLE KEYS */;
-INSERT INTO `osago` VALUES (12,'2311','1233','2021-05-13','2021-05-26','2021-05-13',1,3),(19,'21313','12313','2021-05-04','2022-05-04','2021-05-04',1,15);
+INSERT INTO `osago` VALUES (24,'0001','0001','2003-06-05','2004-06-05','2003-06-05',1,20),(25,'0002','0002','2004-06-05','2005-06-05','2004-06-05',1,21),(26,'0003','0003','2005-06-05','2006-06-05','2005-06-05',1,22);
 /*!40000 ALTER TABLE `osago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +396,7 @@ CREATE TABLE `pts` (
   CONSTRAINT `fk_PTS_model_TC1` FOREIGN KEY (`model_TC_id`) REFERENCES `model_tc` (`id`),
   CONSTRAINT `fk_PTS_type_engine1` FOREIGN KEY (`type_engine_id`) REFERENCES `type_engine` (`id`),
   CONSTRAINT `fk_PTS_type_TC` FOREIGN KEY (`type_TC_id`) REFERENCES `type_tc` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,7 +405,7 @@ CREATE TABLE `pts` (
 
 LOCK TABLES `pts` WRITE;
 /*!40000 ALTER TABLE `pts` DISABLE KEYS */;
-INSERT INTO `pts` VALUES (4,'1232','3133','1231','2010-03-09','lol','black','20','20','20','20','lada','rus','21312','123','gibbdd','usa','2021-01-09',1,1,1,1,23,3),(6,'21312','12313','2131','1989-03-08','Classic','Black','2133','32313','600','800','USA','USA','','','ГИБДД','г.Павлово','2021-04-26',1,2,3,1,31,4);
+INSERT INTO `pts` VALUES (9,'0001','0001','0001','1999-03-07','отсутствует','отсутствует','120','30','800','1120','China','China','отсутствует','отсутствует','ГИБДД','г.Павлово','2003-06-05',1,1,1,6,34,4),(10,'0002','0002','0002','1999-03-07','отсутствует','отсутствует','120','30','800','1120','China','China','отсутствует','отсутствует','ГИБДД','г.Павлово','2004-06-05',1,1,2,7,35,4),(11,'0003','0003','0003','1999-03-07','отсутствует','отсутствует','120','30','800','1120','China','China','отсутствует','отсутствует','ГИБДД','г.Павлово','2005-06-05',1,1,5,8,36,4);
 /*!40000 ALTER TABLE `pts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-05  2:36:59
+-- Dump completed on 2021-06-11  4:17:09

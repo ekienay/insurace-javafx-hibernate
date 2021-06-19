@@ -1,5 +1,7 @@
 package entity;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Entity
@@ -42,10 +45,10 @@ public class Driver {
     @Column(name = "passport_number")
     private String passportNumber;
 
-    @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Set<DrvLicense> drvLicense = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "driver_to_osago",
             joinColumns = {
                     @JoinColumn(name = "driver_id")
@@ -54,8 +57,18 @@ public class Driver {
     })
     Set<Osago> osagos = new HashSet<>();
 
-    @OneToMany(mappedBy = "drivers", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "drivers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Set<Pts> pts;
+
+    public ObservableList<String> getInsurance(){
+        Iterator<Osago> iterator = getOsagos().iterator();
+        ObservableList<String> model = FXCollections.observableArrayList();
+        while(iterator.hasNext()){
+            String modelTC = iterator.next().getOsagoNumber();
+            model.add(modelTC);
+        }
+        return model;
+    }
 
     @Override
     public String toString() {

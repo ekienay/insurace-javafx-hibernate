@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class TypeTCService implements DAO<TypeTC,Integer> {
+public class TypeTCService implements DAO<TypeTC> {
 
     private final SessionFactory factory;
 
@@ -18,7 +18,6 @@ public class TypeTCService implements DAO<TypeTC,Integer> {
 
     @Override
     public void create(TypeTC typeTC) {
-
     }
 
     @Override
@@ -29,7 +28,6 @@ public class TypeTCService implements DAO<TypeTC,Integer> {
             session.getTransaction().commit();
             session.close();
         }
-
     }
 
     @Override
@@ -38,13 +36,8 @@ public class TypeTCService implements DAO<TypeTC,Integer> {
     }
 
     @Override
-    public TypeTC readById(Integer integer) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<TypeTC> generateContract() {
+    public List<TypeTC> findByAll() {
         try(Session session = factory.openSession()){
             Query<TypeTC> query = session.createQuery("From TypeTC");
             return query.list();

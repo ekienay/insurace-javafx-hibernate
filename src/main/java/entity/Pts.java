@@ -82,11 +82,11 @@ public class Pts {
     @JoinColumn(name = "ECO_class_id")
     private EcoClass ecoClass;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "model_TC_id")
     private ModelTC modelTC;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "driver_id")
     private Driver drivers;
 
@@ -94,7 +94,7 @@ public class Pts {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "pts", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pts", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     Set<Certificate> certificateSet;
 
     @Override

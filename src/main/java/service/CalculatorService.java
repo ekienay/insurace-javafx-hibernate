@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class CalculatorService  implements DAO<Calculator, Integer> {
+public class CalculatorService  implements DAO<Calculator> {
 
     private final SessionFactory factory;
 
@@ -47,16 +47,8 @@ public class CalculatorService  implements DAO<Calculator, Integer> {
     }
 
     @Override
-    public Calculator readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Calculator.class, integer);
-        }
-
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Calculator> generateContract() {
+    public List<Calculator> findByAll() {
         try(Session session = factory.openSession()){
             Query<Calculator> query = session.createQuery("From Calculator");
             return query.list();

@@ -39,14 +39,14 @@ public class Osago {
     @JoinColumn(name = "agent_id")
     private Agent agent;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "driver_to_osago",
             joinColumns = {
                     @JoinColumn(name = "osago_id")
             },inverseJoinColumns = {
             @JoinColumn(name = "driver_id")
     })
-    Set<Driver> drivers = new HashSet<>();
+   private Set<Driver> drivers = new HashSet<>();
 
     public  void addDriver(Driver driver){
         drivers.add(driver);

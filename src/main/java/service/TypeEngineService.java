@@ -2,14 +2,13 @@ package service;
 
 import dao.DAO;
 import entity.TypeEngine;
-import entity.TypeTC;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class TypeEngineService implements DAO<TypeEngine,Integer> {
+public class TypeEngineService implements DAO<TypeEngine> {
 
     private final SessionFactory factory;
 
@@ -33,13 +32,8 @@ public class TypeEngineService implements DAO<TypeEngine,Integer> {
     }
 
     @Override
-    public TypeEngine readById(Integer integer) {
-        return null;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<TypeEngine> generateContract() {
+    public List<TypeEngine> findByAll() {
         try (Session session = factory.openSession()) {
             Query<TypeEngine> query = session.createQuery("From TypeEngine");
             return query.list();

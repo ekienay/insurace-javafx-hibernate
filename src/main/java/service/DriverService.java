@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class DriverService implements DAO<Driver, Integer> {
+public class DriverService implements DAO<Driver> {
 
     private final SessionFactory factory;
 
@@ -43,19 +43,10 @@ public class DriverService implements DAO<Driver, Integer> {
     }
 
     @Override
-    public Driver readById(Integer integer) {
-        try(Session session = factory.openSession()){
-            return session.get(Driver.class, integer);
-
-        }
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Driver> generateContract() {
+    public List<Driver> findByAll() {
         try(Session session = factory.openSession()){
             List<Driver> driverList = session.createQuery("From Driver").list();
-            session.close();
             return driverList;
         }
     }
